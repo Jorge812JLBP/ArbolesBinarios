@@ -1,6 +1,6 @@
-//const chalk = require('chalk');
+const chalk = require('chalk');
 
-let cosas = new Arbolbinario();
+let cosas = new ArbolesBinarios();
 
 let producto1 = new productos(1,"Nissan sentra",280000,2);
 cosas.agregar(producto1);
@@ -30,16 +30,24 @@ class productos
         this.nombre=nombre;
         this.precio=precio;
         this.cantidad=cantidad;
-        this.raiz=null;
         this.hijoIzq=null;
         this.hijoDer=null;
+    }
+    info()
+    {
+        return chalk.green("ID: "+this.id+ " Nombre: "+this.nombre+" Precio: "+this.precio+" Cantidad "+this.cantidad);
+    }
+}
+
+class ArbolesBinarios
+{
+    constructor()
+    {
+        this.raiz=null;
     }
 
 
 
-
-    
-    
     Agregar(nuevo)
     {
         if (this.raiz==null)
@@ -56,15 +64,9 @@ class productos
 
 
 
-
-
-
-
-
-
     queTeAtienda(nuevo, nodo)
     {
-        if (nuevo<nodo)
+        if (nuevo.id<nodo.id)
         {
             if(nodo.hijoIzq==null)
             {
@@ -119,11 +121,12 @@ class productos
         if (nodo.hijoIzq!=null)
         {
             this.ProcesaInOrder(nodo.hijoIzq);
-            console.log(nodo);  
+            console.log(nodo.info);  
         }  
         if (nodo.hijoDer!=null)
         {
             this.ProcesaInOrder(nodo.hijoDer);
+            console.log(nodo.info);
         }   
            
     }
@@ -155,16 +158,18 @@ class productos
         
     ProcesaPreOrder(nodo)  
     {
-        console.log(nodo);  
+        console.log(nodo.info);  
 
         if (nodo.hijoIzq!=null)
         {
             this.ProcesaPreOrder(nodo.hijoIzq);
+            console.log(nodo.info);
         }  
          
         if (nodo.hijoDer!=null)
         {
             this.ProcesaPreOrder(nodo.hijoDer);
+            console.log(nodo.info);
         }  
         
     }
@@ -200,13 +205,21 @@ class productos
         if (nodo.hijoIzq!=null) 
         {
             this.ProcesaPostOrder(nodo.hijoIzq);
+            console.log(nodo.info);
         } 
         
         if (nodo.hijoDer!=null)
         {
             this.ProcesaPostOrder(nodo.hijoDer);
+            console.log(nodo.info);
         }  
        
-        console.log(nodo);  
+        console.log(nodo.info);  
     }
 }
+
+
+
+    
+    
+   
